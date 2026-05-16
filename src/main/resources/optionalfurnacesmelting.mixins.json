@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.ofs.ofsmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["OptionalFurnaceSmeltingMixin","FurnaceOutputOverrideMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

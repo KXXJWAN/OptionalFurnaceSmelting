@@ -1,0 +1,13 @@
+{
+  "itemGroup.optionalfurnacesmelting": "Example Mod Tab",
+  "block.optionalfurnacesmelting.example_block": "Example Block",
+  "item.optionalfurnacesmelting.example_item": "Example Item",
+
+  "optionalfurnacesmelting.configuration.title": "OptionalFurnaceSmelting Configs",
+  "optionalfurnacesmelting.configuration.section.optionalfurnacesmelting.common.toml": "OptionalFurnaceSmelting Configs",
+  "optionalfurnacesmelting.configuration.section.optionalfurnacesmelting.common.toml.title": "OptionalFurnaceSmelting Configs",
+  "optionalfurnacesmelting.configuration.items": "Item List",
+  "optionalfurnacesmelting.configuration.logDirtBlock": "Log Dirt Block",
+  "optionalfurnacesmelting.configuration.magicNumberIntroduction": "Magic Number Text",
+  "optionalfurnacesmelting.configuration.magicNumber": "Magic Number"
+}
