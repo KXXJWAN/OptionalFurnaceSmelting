@@ -16,10 +16,7 @@ import javax.annotation.Nullable;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public class FurnaceOutputOverrideMixin {
 
-    /**
-     * 修改 canBurn 中的默认产物，使"输出槽兼容性检查"基于玩家选中的目标产物。
-     * canBurn 中第一个 ItemStack 局部变量（itemstack）就是默认配方产物，ordinal = 0
-     */
+    //Modify result of 'canBurn' method
     @ModifyVariable(
             method = "canBurn",
             at = @At("STORE"),
@@ -36,10 +33,7 @@ public class FurnaceOutputOverrideMixin {
         return ofsmod$getTargetOrOriginal(furnace, original);
     }
 
-    /**
-     * 修改 burn 中实际放入输出槽的产物。
-     * burn 中第二个 ItemStack 局部变量（itemstack1）是 assemble 出来的产物，ordinal = 1
-     */
+    //Modify result of 'burn' method
     @ModifyVariable(
             method = "burn",
             at = @At("STORE"),
@@ -59,10 +53,9 @@ public class FurnaceOutputOverrideMixin {
     @Unique
     private static ItemStack ofsmod$getTargetOrOriginal(AbstractFurnaceBlockEntity furnace, ItemStack original) {
         ItemStack target = furnace.getData(ModAttachments.SMELT_TARGET.get());
-        if (target.isEmpty()) {
-            return original; // 玩家没选，走原版默认产物
-        }
-        // 保持原版计算出的数量（通常为 1）
+        if (target.isEmpty()) return original; // When selected result was not changed
+
+        // When selected result was changed
         ItemStack replacement = target.copy();
         replacement.setCount(original.getCount());
         return replacement;

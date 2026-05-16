@@ -12,11 +12,11 @@ public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, OptionalFurnaceSmelting.MODID);
 
-    /** 存储熔炉的“目标产物”；空堆叠表示未指定 */
+    // store the target results of furnace
     public static final Supplier<AttachmentType<ItemStack>> SMELT_TARGET = ATTACHMENT_TYPES.register(
             "smelt_target",
-            () -> AttachmentType.builder(() -> ItemStack.EMPTY.copy())
-            .serialize(ItemStack.OPTIONAL_CODEC)   // 1.21.1 可用；如报错可换成 ItemStack.CODEC
+            () -> AttachmentType.builder(ItemStack.EMPTY::copy)
+                    .serialize(ItemStack.OPTIONAL_CODEC)
                     .build()
     );
 }

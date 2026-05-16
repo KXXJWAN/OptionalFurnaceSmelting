@@ -46,7 +46,7 @@ authors="KXXJWAN"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Example mod description.
+This mod adds multiple furnace recipe compatibility, allowing you to selectively smelt an item into the desired output based on different smelting recipes.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
@@ -71,7 +71,7 @@ config="${mod_id}.mixins.json"
     # Optional field describing why the dependency is required or why it is incompatible
     # reason="..."
     # The version range of the dependency
-    versionRange="[${neo_version},)" #mandatory
+    versionRange="${neo_version_range}" #mandatory
     # An ordering relationship for the dependency.
     # BEFORE - This mod is loaded BEFORE the dependency
     # AFTER - This mod is loaded AFTER the dependency
