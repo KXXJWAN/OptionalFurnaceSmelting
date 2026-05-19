@@ -1,6 +1,5 @@
 package com.ofs.ofsmod;
 
-import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -23,9 +22,5 @@ public class OptionalFurnaceSmeltingClient {
     }
 
     @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        OptionalFurnaceSmelting.LOGGER.info("HELLO FROM CLIENT SETUP");
-        OptionalFurnaceSmelting.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-    }
+    static void onClientSetup(FMLClientSetupEvent event) {}
 }

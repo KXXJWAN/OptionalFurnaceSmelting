@@ -78,7 +78,13 @@ public class OptionalFurnaceSmeltingMixin {
         ItemStack input = menu.getSlot(0).getItem();
         // get all recipes of input item
         List<ItemStack> results = ofsmod$fetchResults(input);
-        if (results.size() < 2) return;
+        if (results.size() == 1) {
+            var holders = ofsmod$fetchRecipeHolders(input);
+            PacketDistributor.sendToServer(new OptionalFurnaceSmeltingPayload(holders.getFirst().id()));
+            return;
+        } else if (results.isEmpty()) {
+            return;
+        }
         // get X-axis coordinate of furnace's GUI
         int leftPos = screen.getGuiLeft();
         // get Y-axis coordinate of furnace's GUI
@@ -178,7 +184,7 @@ public class OptionalFurnaceSmeltingMixin {
 
         AbstractFurnaceMenu menu = (AbstractFurnaceMenu) screen.getMenu();
         List<ItemStack> results = ofsmod$fetchResults(menu.getSlot(0).getItem());
-
+        if (results.size() < 2) return;
         int maxPage = Math.max(0, (results.size() - 1) / ofsmod$SLOTS_PER_PAGE);
         if (ofsmod$pageIndex > maxPage) {
             ofsmod$pageIndex = maxPage;
@@ -222,7 +228,7 @@ public class OptionalFurnaceSmeltingMixin {
                     ResourceLocation id = holder.id();
                     ofsmod$selectedIndex = globalIdx;
                     ofsmod$playClick();
-                    PacketDistributor.sendToServer(new OptionalFurnaceSmeltingPayload(globalIdx, id));
+                    PacketDistributor.sendToServer(new OptionalFurnaceSmeltingPayload(id));
                 }
                 cir.setReturnValue(true);
                 return;

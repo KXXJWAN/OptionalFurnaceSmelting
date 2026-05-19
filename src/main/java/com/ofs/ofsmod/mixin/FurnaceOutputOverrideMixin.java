@@ -1,5 +1,6 @@
 package com.ofs.ofsmod.mixin;
 
+import com.ofs.ofsmod.OptionalFurnaceSmelting;
 import com.ofs.ofsmod.attachment.ModAttachments;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
