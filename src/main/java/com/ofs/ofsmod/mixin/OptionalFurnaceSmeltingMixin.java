@@ -67,11 +67,13 @@ public class OptionalFurnaceSmeltingMixin {
     private static final int ofsmod$BUTTON_H = 12;
     @Unique
     private static final int ofsmod$MARGIN = 8;
+    @Unique
+    private ItemStack ofsmod$hoveredResult = ItemStack.EMPTY;
 
     @Inject(method = "renderBg", at = @At("TAIL"))
     private void ofsmod$renderSideMenu(GuiGraphics guiGraphics, float partialTick,
                                        int mouseX, int mouseY, CallbackInfo ci) {
-
+        ofsmod$hoveredResult = ItemStack.EMPTY;
         AbstractContainerScreen<?> screen = this.ofsmod$asContainerScreen();
         AbstractFurnaceMenu menu = (AbstractFurnaceMenu) screen.getMenu();
         // get input slot of furnace
@@ -140,10 +142,15 @@ public class OptionalFurnaceSmeltingMixin {
             guiGraphics.fill(menuX + 15, slotY, menuX + 16, slotY + 16, 0xFF555555);
             guiGraphics.fill(menuX, slotY + 15, menuX + 16, slotY + 16, 0xFF555555);
 
+
+            // tooltip rendering
             if (idx < results.size()) {
                 ItemStack stack = results.get(idx);
                 guiGraphics.renderItem(stack, menuX, slotY);
                 guiGraphics.renderItemDecorations(Minecraft.getInstance().font, stack, menuX, slotY);
+                if (ofsmod$inRect(mouseX, mouseY, menuX, slotY, 16, 16)) {
+                    ofsmod$hoveredResult = stack;
+                }
             }
 
             // rendering of highlights
@@ -233,6 +240,20 @@ public class OptionalFurnaceSmeltingMixin {
                 cir.setReturnValue(true);
                 return;
             }
+        }
+    }
+
+    // adding Tooltip
+    @Inject(method = "render", at = @At("TAIL"))
+    private void ofsmod$renderCustomTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY,
+                                            float partialTick, CallbackInfo ci) {
+        if (!ofsmod$hoveredResult.isEmpty()) {
+            guiGraphics.renderTooltip(
+                    Minecraft.getInstance().font,
+                    ofsmod$hoveredResult,
+                    mouseX,
+                    mouseY
+            );
         }
     }
 
